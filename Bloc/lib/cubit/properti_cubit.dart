@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class propertiCubit extends Cubit<propertiModel> {
-  String url = "http://127.0.0.1:8000/daftar_properti";
+  String url = "http://127.0.0.1:8000/detil_properti/";
   propertiCubit()
       : super(propertiModel(
             id: "",
