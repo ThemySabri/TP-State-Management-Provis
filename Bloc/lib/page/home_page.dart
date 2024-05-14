@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                         child: ListView.builder(
                           itemCount: propertiList.length,
                           itemBuilder: (context, index) {
-                            if (propertiList[0].lokasi != "") {
+                            if (propertiList[0].id != "") {
                               return ListTile(
                                   leading: Image.network(
                                       'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                                       context
                                           .read<propertiCubit>()
                                           .fetchData(propertiList[index].id);
-                                      return DetailPropertiPage();
+                                      return DetailUmkmPage();
                                     }));
                                   });
                             }

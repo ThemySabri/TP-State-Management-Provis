@@ -57,6 +57,7 @@ class propertiListCubit extends Cubit<List<propertiModel>> {
 
   void fetchData() async {
     final response = await http.get(Uri.parse(url));
+    print(response.statusCode);
     if (response.statusCode == 200) {
       //sukses
       setFromJson(jsonDecode(response.body));

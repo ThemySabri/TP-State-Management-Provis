@@ -1,40 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tp_3/cubit/daftar_properti_cubit.dart';
 import 'package:tp_3/cubit/properti_cubit.dart';
 import 'package:tp_3/cubit/properti_state.dart';
 import 'dart:developer' as developer;
 
-class DetailPropertiPage extends StatelessWidget {
+class DetailUmkmPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detail'),
-        centerTitle: true,
-      ),
-      body: BlocBuilder<propertiCubit, propertiModel>(
-        builder: (context, state) {
-          if (state is propertiModel) {
-            // Access propertiDetail from PropertiLoadedState
-            final propertiDetail = state;
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue[200],
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3),
-                    )
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    children: [
+        appBar: AppBar(
+          title: const Text('Detail'),
+          centerTitle: true,
+        ),
+        body: Column(
+          children: [
+            BlocBuilder<propertiCubit, propertiModel>(
+                buildWhen: (previousState, state) {
+              developer.log('${previousState.id}->${state.id}', name: 'log');
+              return true;
+            }, builder: (context, propertiDetail) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue[200],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3),
+                      )
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(children: [
                       Text(
                         'Lokasi: ${propertiDetail.lokasi}',
                         style: TextStyle(color: Colors.white),
@@ -91,17 +93,12 @@ class DetailPropertiPage extends StatelessWidget {
                           style: TextStyle(color: Colors.white)),
                       SizedBox(height: 5.0),
                       // Add more Text widgets for other properties
-                    ],
+                    ]),
                   ),
                 ),
-              ),
-            );
-          } else {
-            // Handle other states if needed
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-    );
+              );
+            })
+          ],
+        ));
   }
 }
